@@ -14,7 +14,15 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/server" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/server" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
