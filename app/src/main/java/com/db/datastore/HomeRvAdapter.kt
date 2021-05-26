@@ -1,39 +1,51 @@
 package com.db.datastore
 
 import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import org.w3c.dom.Text
 
 class HomeRvAdapter (private val items: ArrayList<recyclerList>) : RecyclerView.Adapter<HomeRvAdapter.ViewHolder>() {
 //
+    var imageurl : String? = null
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
         private var view : View = v
 
-        val textview : TextView? = null
+        var title : TextView? = null
+        var address : TextView? = null
+        var imageview : ImageView? = null
+        var price : TextView?  = null
+        var reply : TextView? = null
+        var heart : TextView? = null
 
         fun bind(listener:View.OnClickListener,item: recyclerList) {
 
-//            tv_name.text= item.name
-//            tv_minPrice.text= item.minPrice.toString()
-//            tv_deliveryTip.text= item.deliveryTip.toString()
-//            tv_deliveryTime.text= item.deliverTime.toString()
+            title!!.text = item.title
+            address!!.text = item.address
+            price!!.text = item.price.toString()
+            reply!!.text = item.reply.toString()
+            heart!!.text = item.heart.toString()
+
             view.setOnClickListener(listener)
-            //view..setImageDrawable(item.image)
-            //tv_name.text = item.name.setOnClickListener(listener)
         }
 
         init
         {
-//            layout = view.findViewById(R.id.rc_layout)
-//            tv_name = view.findViewById(R.id.rc_tv_name)
-//            tv_deliveryTime = view.findViewById(R.id.rc_tv_deliverytime)
-//            tv_deliveryTip = view.findViewById(R.id.rc_tv_deliveytip)
-//            tv_minPrice = view.findViewById(R.id.rc_tv_minprice)
+            imageview = view.findViewById(R.id.iv_profile_home_rv)
+            title = view.findViewById(R.id.tv_title_home_rv)
+            address = view.findViewById(R.id.tv_address_home_tv)
+            price = view.findViewById(R.id.tv_price_home_rv)
+            reply= view.findViewById(R.id.tv_reply_home_rv)
+            heart = view.findViewById(R.id.tv_heart_home_rv)
+
         }
 
     }
@@ -57,6 +69,7 @@ class HomeRvAdapter (private val items: ArrayList<recyclerList>) : RecyclerView.
             bind(listener,item)
             itemView.tag= item
         }
+        Glide.with(holder.itemView.context).load(item.imageview).into(holder.imageview!!)
     }
 
 

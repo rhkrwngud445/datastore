@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/home_50px"
+        android:id="@+id/first"
+        android:enabled="true"
+        android:title="홈"
+        android:visible="true"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:icon="@drawable/dongnae_life_50px"
+        android:id="@+id/second"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:title="동네생활"
+
+        />
+    <item
+        android:icon="@drawable/myposition_50px"
+        android:id="@+id/third"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="내근처"
+         />
+    <item
+        android:icon="@drawable/chat_50px"
+        android:id="@+id/fourd"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="채팅"
+         />
+    <item
+        android:icon="@drawable/myinfo_50px"
+        android:id="@+id/fifth"
+        android:enabled="true"
+        android:title="나의 당근"
+        app:showAsAction="ifRoom"
+         />
+</menu>
+
