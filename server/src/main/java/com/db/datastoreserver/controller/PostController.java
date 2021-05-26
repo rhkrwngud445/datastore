@@ -8,7 +8,9 @@ import com.db.datastoreserver.service.dto.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -35,9 +37,10 @@ public class PostController {
 
     @PostMapping("/write")
     public ResponseEntity<Void> write(
-            @RequestBody PostCreateRequest request
-    ) {
-        Long postId = postService.createPost(request, session.findById(1L)
+            @RequestBody PostCreateRequest request,
+            List<MultipartFile> photos
+    ) throws IOException {
+        Long postId = postService.createPost(request,photos, session.findById(1L)
                 .orElseThrow(IllegalArgumentException::new));
 
         return ResponseEntity.created(URI.create("/api/posts/" + postId)).build();
