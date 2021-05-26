@@ -40,7 +40,7 @@ public class PostController {
             @RequestBody PostCreateRequest request,
             List<MultipartFile> photos
     ) throws IOException {
-        Long postId = postService.createPost(request,photos, session.findById(1L)
+        Long postId = postService.createPost(request, photos, session.findById(1L)
                 .orElseThrow(IllegalArgumentException::new));
 
         return ResponseEntity.created(URI.create("/api/posts/" + postId)).build();

@@ -15,3 +15,4 @@
 local.properties
 server/src/main/resources/application-s3.properties
 application-s3.properties
+gradle.xml
