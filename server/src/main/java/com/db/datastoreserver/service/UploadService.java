@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -42,7 +43,11 @@ public class UploadService {
     }
 
     public String upload(MultipartFile file) throws IOException {
-        String fileName = UUID.randomUUID() + findExtension(file.getName());
+        String originalFileName = Optional.ofNullable(file.getOriginalFilename())
+                .filter(name -> !name.isEmpty())
+                .orElse(file.getName());
+        String extension = findExtension(originalFileName);
+        String fileName = UUID.randomUUID() + extension;
 
         s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));

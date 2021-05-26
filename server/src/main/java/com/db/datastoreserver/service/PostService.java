@@ -46,13 +46,17 @@ public class PostService {
         return PostResponse.of(post);
     }
 
-    public Long createPost(PostCreateRequest request, List<MultipartFile> photos, Member member) throws IOException {
+    public Long createPost(PostCreateRequest request, Member member) throws IOException {
         List<Photo> photoUrls = new ArrayList<>();
-        for (MultipartFile photo : photos) {
-            Photo photoEntity = Photo.builder()
-                    .url(uploadService.upload(photo))
-                    .build();
-            photoUrls.add(photoEntity);
+        List<MultipartFile> photos = request.getPhotos();
+        
+        if (!Objects.isNull(photos)) {
+            for (MultipartFile photo : photos) {
+                Photo photoEntity = Photo.builder()
+                        .url(uploadService.upload(photo))
+                        .build();
+                photoUrls.add(photoEntity);
+            }
         }
 
         Post savedPost = postRepository.save(request.toEntity(member, photoUrls));
