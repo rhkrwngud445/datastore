@@ -1,10 +1,13 @@
 package com.db.datastore
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +37,12 @@ class HomeFragment : Fragment() {
 
         recyclerView = root.findViewById(R.id.recyclerview_home)
         var adapter: HomeRvAdapter
+
+        val categoryBt : ImageButton = root!!.findViewById(R.id.home_tune_ib)
+        categoryBt.setOnClickListener {
+            val categoryIntent = Intent(activity,SelectCategoryActivity::class.java)
+            startActivity(categoryIntent)
+        }
 
         var ResellService = retrofit.create(ResellService::class.java)
         ResellService.getStoreList().enqueue(object : Callback<List<ResellResponse>>{
