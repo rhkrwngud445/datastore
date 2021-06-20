@@ -18,9 +18,9 @@ class MemberRepositoryTest {
     @Test
     public void saveTest() {
         Member member = Member.builder()
-            .name("사람")
-            .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
-            .build();
+                .name("사람")
+                .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
+                .build();
 
         assertDoesNotThrow(() -> repository.save(member));
     }
@@ -28,9 +28,9 @@ class MemberRepositoryTest {
     @Test
     public void findTest() {
         Member member = Member.builder()
-            .name("사람")
-            .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
-            .build();
+                .name("사람")
+                .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
+                .build();
 
         Member savedMember = repository.save(member);
         Member findMember = repository.findById(savedMember.getId()).orElse(null);

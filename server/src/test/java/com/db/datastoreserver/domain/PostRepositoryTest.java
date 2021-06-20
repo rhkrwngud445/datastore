@@ -27,26 +27,26 @@ class PostRepositoryTest {
     @Test
     public void saveTest() {
         Member member = Member.builder()
-            .name("사람")
-            .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
-            .build();
+                .name("사람")
+                .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
+                .build();
 
         memberRepository.save(member);
 
         Location location = Location.builder()
-            .longitude("35.191273")
-            .latitude("129.096987")
-            .build();
+                .longitude("35.191273")
+                .latitude("129.096987")
+                .build();
 
         Post post = Post.builder()
-            .title("닌텐도팔아요~")
-            .author(member)
-            .category(Category.디지털_가전)
-            .content("네고사절")
-            .price(350_000L)
-            .status(Status.SALE)
-            .location(location)
-            .build();
+                .title("닌텐도팔아요~")
+                .author(member)
+                .category(Category.디지털_가전)
+                .content("네고사절")
+                .price(350_000L)
+                .status(Status.SALE)
+                .location(location)
+                .build();
 
         assertDoesNotThrow(() -> postRepository.save(post));
     }
@@ -54,31 +54,31 @@ class PostRepositoryTest {
     @Test
     public void findTest() {
         Member member = Member.builder()
-            .name("사람")
-            .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
-            .build();
+                .name("사람")
+                .profilePhotoUrl("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200")
+                .build();
 
         memberRepository.save(member);
 
         Location location = Location.builder()
-            .longitude("35.191273")
-            .latitude("129.096987")
-            .build();
+                .longitude("35.191273")
+                .latitude("129.096987")
+                .build();
 
         List<Photo> photos = Arrays.asList(Photo.builder()
-            .url(RANDOM_PHOTO_URL).build(), Photo.builder().url(RANDOM_PHOTO_URL)
-            .build());
+                .url(RANDOM_PHOTO_URL).build(), Photo.builder().url(RANDOM_PHOTO_URL)
+                .build());
 
         Post post = Post.builder()
-            .title("닌텐도팔아요~")
-            .author(member)
-            .category(Category.디지털_가전)
-            .content("네고사절")
-            .price(350_000L)
-            .status(Status.SALE)
-            .location(location)
-            .photos(photos)
-            .build();
+                .title("닌텐도팔아요~")
+                .author(member)
+                .category(Category.디지털_가전)
+                .content("네고사절")
+                .price(350_000L)
+                .status(Status.SALE)
+                .location(location)
+                .photos(photos)
+                .build();
 
         Post savedPost = postRepository.save(post);
         Post findPost = postRepository.findById(savedPost.getId()).orElse(null);

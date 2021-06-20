@@ -67,8 +67,8 @@ public class Post {
 
     @Builder
     public Post(Long id, Member author, String title, String content,
-        List<Photo> photos, Location location, Long price, Set<Like> likes,
-        Category category, Status status, LocalDateTime createdDate, LocalDateTime updatedDate) {
+                List<Photo> photos, Location location, Long price, Set<Like> likes,
+                Category category, Status status, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.id = id;
         setAuthor(author);
         this.title = title;
