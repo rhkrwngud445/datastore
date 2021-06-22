@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile
 data class PostCreateRequest(
     val title: String,
     val content: String,
-    val photos: List<MultipartFile?>,
+    val photos: List<MultipartFile?> = emptyList(),
     val longitude: String,
     val latitude: String,
     val price: Int,

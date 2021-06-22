@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct
 const val EXTENSION_DELIMITER = "."
 
 @Service
-class UploadService {
+class S3Service {
 
     lateinit var s3Client: AmazonS3
 
@@ -40,21 +40,25 @@ class UploadService {
             .build()
     }
 
-    fun upload(file: MultipartFile): String? {
-        val originalFileName = Optional.ofNullable(file.originalFilename)
-            .filter { name: String -> name.isNotEmpty() }
-            .orElse(file.name)
+    fun upload(file: MultipartFile?): String {
+        val originalFileName = Optional.ofNullable(file?.originalFilename)
+            .filter { it.isNotEmpty() }
+            .orElse(file?.name)
         val extension = findExtension(originalFileName)
-        val fileName = UUID.randomUUID().toString() + extension
-        s3Client.putObject(
-            PutObjectRequest(bucket, fileName, file.inputStream, null)
-                .withCannedAcl(CannedAccessControlList.PublicRead)
-        )
-        return s3Client.getUrl(bucket, fileName).toString()
+        val fileName = randomFileNameWithExtension(extension)
+        val request = PutObjectRequest(bucket, fileName, file?.inputStream, null)
+            .withCannedAcl(CannedAccessControlList.PublicRead)
+        s3Client.putObject(request)
+
+        return fileName
     }
 
+    fun retrieve(fileName: String) = s3Client.getUrl(bucket, fileName).toString()
+
     private fun findExtension(originalFileName: String): String {
-        val position = originalFileName.lastIndexOf(".")
+        val position = originalFileName.lastIndexOf(EXTENSION_DELIMITER)
         return originalFileName.substring(position)
     }
+
+    private fun randomFileNameWithExtension(extension: String) = UUID.randomUUID().toString().plus(extension)
 }

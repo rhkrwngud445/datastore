@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 @Service
 class PostService(
     private val repository: PostRepository,
-    private val uploadService: UploadService
+    private val s3Service: S3Service
 ) {
 
     fun findPost(id: String): Post {
@@ -22,7 +22,9 @@ class PostService(
 
     fun createPost(request: PostCreateRequest, member: Member): String? {
         val photoUrls = request.photos
-            .map { Photo(it?.let { photo -> uploadService.upload(photo) }) }
+            .map { s3Service.upload(it) }
+            .map { s3Service.retrieve(it) }
+            .map { Photo(it) }
             .toList()
 
         val savedPost = repository.save(
