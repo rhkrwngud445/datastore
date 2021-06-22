@@ -2,6 +2,8 @@ package com.db.kdatastoreserver.service
 
 import com.db.kdatastoreserver.domain.*
 import com.db.kdatastoreserver.domain.repository.PostRepository
+import com.db.kdatastoreserver.service.dto.PostCreateRequest
+import com.db.kdatastoreserver.service.dto.PostResponse
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -11,13 +13,15 @@ class PostService(
     private val s3Service: S3Service
 ) {
 
-    fun findPost(id: String): Post {
+    fun findPost(id: String): PostResponse {
         return repository.findById(id)
+            .map { PostResponse(it) }
             .orElseThrow { IllegalArgumentException() }
     }
 
-    fun findAllPost(categories: List<Category>): List<Post> {
+    fun findAllPost(categories: List<Category>): List<PostResponse> {
         return repository.findAllByCategoryIn(categories)
+            .map { PostResponse(it) }
     }
 
     fun createPost(request: PostCreateRequest, member: Member): String? {

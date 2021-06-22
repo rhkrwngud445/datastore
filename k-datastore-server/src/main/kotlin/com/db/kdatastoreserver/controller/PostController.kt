@@ -1,10 +1,10 @@
-package com.db.kdatastoreserver
+package com.db.kdatastoreserver.controller
 
 import com.db.kdatastoreserver.domain.Category
 import com.db.kdatastoreserver.domain.Member
-import com.db.kdatastoreserver.domain.Post
-import com.db.kdatastoreserver.service.PostCreateRequest
 import com.db.kdatastoreserver.service.PostService
+import com.db.kdatastoreserver.service.dto.PostCreateRequest
+import com.db.kdatastoreserver.service.dto.PostResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
@@ -19,14 +19,14 @@ class PostController(
     @GetMapping("/all")
     fun all(
         @RequestParam(required = false) categories: List<Category>
-    ): ResponseEntity<List<Post>> {
+    ): ResponseEntity<List<PostResponse>> {
         return ResponseEntity.ok(service.findAllPost(categories))
     }
 
     @GetMapping("/{id}")
     fun each(
         @PathVariable("id") id: String
-    ): ResponseEntity<Post> {
+    ): ResponseEntity<PostResponse> {
         return ResponseEntity.ok(service.findPost(id))
     }
 

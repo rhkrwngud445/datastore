@@ -1,4 +1,4 @@
-package com.db.kdatastoreserver.service
+package com.db.kdatastoreserver.service.dto
 
 import com.db.kdatastoreserver.domain.Category
 import org.springframework.web.multipart.MultipartFile
