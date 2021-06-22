@@ -23,6 +23,13 @@ class PostController(
         return ResponseEntity.ok(service.findAllPost(categories))
     }
 
+    @GetMapping("/{id}")
+    fun each(
+        @PathVariable("id") id: String
+    ): ResponseEntity<Post> {
+        return ResponseEntity.ok(service.findPost(id))
+    }
+
     @PostMapping("/write")
     fun write(
         @ModelAttribute request: PostCreateRequest

@@ -1,10 +1,12 @@
 package com.db.kdatastoreserver.domain
 
+import org.bson.types.ObjectId
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 
 @Document(value = "post")
 data class Post(
+    val _id: ObjectId?,
     val member: Member,
     val title: String,
     val content: String,
@@ -16,7 +18,7 @@ data class Post(
     val status: Status,
     val createdDate: LocalDateTime,
     val updatedDate: LocalDateTime,
-    )
+)
 
 data class Location(
     val longitude: String,

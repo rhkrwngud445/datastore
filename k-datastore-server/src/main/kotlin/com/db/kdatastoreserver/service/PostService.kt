@@ -11,17 +11,23 @@ class PostService(
     private val uploadService: UploadService
 ) {
 
-    fun findAllPost(categories: List<Category>): List<Post> {
-        return repository.findAll()
+    fun findPost(id: String): Post {
+        return repository.findById(id)
+            .orElseThrow { IllegalArgumentException() }
     }
 
-    fun createPost(request: PostCreateRequest, member: Member): Long? {
+    fun findAllPost(categories: List<Category>): List<Post> {
+        return repository.findAllByCategoryIn(categories)
+    }
+
+    fun createPost(request: PostCreateRequest, member: Member): String? {
         val photoUrls = request.photos
             .map { Photo(it?.let { photo -> uploadService.upload(photo) }) }
             .toList()
 
-        repository.save(
+        val savedPost = repository.save(
             Post(
+                null,
                 member,
                 request.title,
                 request.content,
@@ -35,6 +41,6 @@ class PostService(
                 LocalDateTime.now()
             )
         )
-        return 1
+        return savedPost._id.toString()
     }
 }
