@@ -16,7 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation ("com.amazonaws:aws-java-sdk-s3:1.11.820")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.11.820")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

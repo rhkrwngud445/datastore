@@ -8,6 +8,9 @@ import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.s3.model.CannedAccessControlList
 import com.amazonaws.services.s3.model.PutObjectRequest
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -16,6 +19,7 @@ import javax.annotation.PostConstruct
 
 const val EXTENSION_DELIMITER = "."
 
+@DelicateCoroutinesApi
 @Service
 class S3Service {
 
@@ -48,7 +52,9 @@ class S3Service {
         val fileName = randomFileNameWithExtension(extension)
         val request = PutObjectRequest(bucket, fileName, file?.inputStream, null)
             .withCannedAcl(CannedAccessControlList.PublicRead)
-        s3Client.putObject(request)
+        GlobalScope.launch {
+            s3Client.putObject(request)
+        }
 
         return fileName
     }
