@@ -1,12 +1,14 @@
 package com.db.kdatastoreserver.domain
 
 import org.bson.types.ObjectId
+import org.springframework.data.annotation.Reference
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 
 @Document(value = "post")
 data class Post(
     val _id: ObjectId?,
+    @Reference
     val member: Member,
     val title: String,
     val content: String,

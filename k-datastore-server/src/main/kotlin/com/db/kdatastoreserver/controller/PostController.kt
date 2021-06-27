@@ -1,7 +1,7 @@
 package com.db.kdatastoreserver.controller
 
 import com.db.kdatastoreserver.domain.Category
-import com.db.kdatastoreserver.domain.Member
+import com.db.kdatastoreserver.domain.repository.MemberRepository
 import com.db.kdatastoreserver.service.PostService
 import com.db.kdatastoreserver.service.dto.PostCreateRequest
 import com.db.kdatastoreserver.service.dto.PostResponse
@@ -9,12 +9,11 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
 
-const val DEFAULT_IMAGE: String = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
-
 @RestController
 @RequestMapping("/api/posts")
 class PostController(
-    private val service: PostService
+    private val service: PostService,
+    private val resolver: MemberRepository
 ) {
     @GetMapping("/all")
     fun all(
@@ -36,7 +35,7 @@ class PostController(
     ): ResponseEntity<Void> {
         val postId = service.createPost(
             request,
-            Member("김", DEFAULT_IMAGE)
+            resolver.findByName("데데시") ?: throw IllegalArgumentException("init member fail")
         )
         return ResponseEntity.created(URI.create("/api/posts/$postId")).build()
     }

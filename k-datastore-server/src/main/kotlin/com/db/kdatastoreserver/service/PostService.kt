@@ -10,6 +10,7 @@ import java.time.LocalDateTime
 @Service
 class PostService(
     private val repository: PostRepository,
+    private val memberService: MemberService,
     private val s3Service: S3Service
 ) {
 
@@ -47,6 +48,8 @@ class PostService(
                 LocalDateTime.now()
             )
         )
+
+        memberService.addWrittenPost(member, savedPost)
         return savedPost._id.toString()
     }
 }
