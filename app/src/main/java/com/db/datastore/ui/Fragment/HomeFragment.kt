@@ -124,7 +124,6 @@ class ResellResponse {
 
     @SerializedName("category")
     val category: String? = null
-
     @SerializedName("status")
     val status: String? = null
 
