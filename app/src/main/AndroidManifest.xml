@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DataStore"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectCategoryActivity"/>
+        <activity android:name=".ui.Activity.SelectCategoryActivity"/>
     </application>
 
 </manifest>

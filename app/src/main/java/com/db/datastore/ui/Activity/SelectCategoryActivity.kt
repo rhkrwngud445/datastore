@@ -8,7 +8,7 @@ import com.db.datastore.*
 import com.db.datastore.ui.Fragment.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class SelectCategoryActivity : AppCompatActivity() {
     companion object{
         val url = "http://10.0.2.2:8080"
     }

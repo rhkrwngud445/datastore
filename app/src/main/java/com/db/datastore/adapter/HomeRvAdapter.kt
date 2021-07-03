@@ -1,4 +1,4 @@
-package com.db.datastore
+package com.db.datastore.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.db.datastore.R
 import com.db.datastore.ui.Fragment.recyclerList
 
 class HomeRvAdapter (private val items: ArrayList<recyclerList>) : RecyclerView.Adapter<HomeRvAdapter.ViewHolder>() {
