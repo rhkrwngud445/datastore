@@ -1,13 +1,21 @@
-package com.db.datastore
+package com.db.datastore.ui.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.db.datastore.adapter.HomeRvAdapter
+import com.db.datastore.R
+import com.db.datastore.`interface`.MainStoreInterface
+import com.db.datastore.data.ResellResponse
+import com.db.datastore.ui.Activity.MainActivity
+import com.db.datastore.ui.Activity.SelectCategoryActivity
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,7 +43,13 @@ class HomeFragment : Fragment() {
         recyclerView = root.findViewById(R.id.recyclerview_home)
         var adapter: HomeRvAdapter
 
-        var ResellService = retrofit.create(ResellService::class.java)
+        val categoryBt : ImageButton = root!!.findViewById(R.id.home_tune_ib)
+        categoryBt.setOnClickListener {
+            val categoryIntent = Intent(activity, SelectCategoryActivity::class.java)
+            startActivity(categoryIntent)
+        }
+
+        var ResellService = retrofit.create(MainStoreInterface::class.java)
         ResellService.getStoreList().enqueue(object : Callback<List<ResellResponse>>{
             override fun onFailure(call: Call<List<ResellResponse>>, t: Throwable) {
                 Log.d("home_failure",t.message.toString())
@@ -85,66 +99,5 @@ data class recyclerList(
     var address: String, var price: Int, var reply: Int, var heart: Int
 )
 
-interface ResellService {
 
-    @GET("/api/posts/all")
-    fun getStoreList(): retrofit2.Call<List<ResellResponse>>
-}
-
-class ResellResponse {
-    @SerializedName("id")
-    val id: String? = null
-
-    @SerializedName("author")
-    val author: Author? = null
-
-    @SerializedName("title")
-    val title: String? = null
-
-    @SerializedName("content")
-    val content: String? = null
-
-    @SerializedName("photos")
-    val photos: ArrayList<Photos>? = null
-
-    @SerializedName("location")
-    val location: Location? = null
-
-    @SerializedName("price")
-    val price: Int? = null
-
-    @SerializedName("category")
-    val category: String? = null
-
-    @SerializedName("status")
-    val status: String? = null
-
-}
-
-class Author {
-    @SerializedName("id")
-    val id: String? = null
-
-    @SerializedName("name")
-    val name: String? = null
-
-    @SerializedName("profilePhotoUrl")
-    val profilePhotoUrl: String? = null
-}
-
-class Photos {
-    @SerializedName("id")
-    val id: String? = null
-
-    @SerializedName("url")
-    val url: String? = null
-}
-
-class Location {
-    @SerializedName("longitude")
-    val longitude: String? = null
-
-    @SerializedName("latitude")
-    val latitude: String? = null
-}
 

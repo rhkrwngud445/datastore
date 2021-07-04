@@ -1,9 +1,11 @@
-package com.db.datastore
+package com.db.datastore.ui.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.db.datastore.*
+import com.db.datastore.ui.Fragment.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +25,11 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(HomeFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.second->{
+                R.id.second ->{
                     replaceFragment(DongnaeFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.third->{
+                R.id.third ->{
                     replaceFragment(AroundOfMeFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(ChatFragmnet())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.fifth->{
+                R.id.fifth ->{
                     replaceFragment(MySettingFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
