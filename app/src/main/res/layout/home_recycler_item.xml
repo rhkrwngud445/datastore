@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="12dp"
     android:orientation="horizontal"
-    tools:context=".MainActivity">
+    tools:context=".ui.Activity.MainActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -32,6 +32,7 @@
         android:layout_marginRight="15dp">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/tv_title_home_rv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
